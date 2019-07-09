@@ -1,32 +1,30 @@
 {
-  "id": "d87fe31d-ae20-4e73-99c6-ec356bb72db7",
+  "id": "3d6d9125-1c39-40c2-9b9e-3f748e22eece",
   "name": "local",
   "values": [
     {
       "key": "rest-house-auth-server-protocol",
       "value": "http",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
       "enabled": true
     },
     {
       "key": "rest-house-auth-server-host",
       "value": "localhost",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
       "enabled": true
     },
     {
       "key": "rest-house-auth-server-port",
       "value": "8080",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "enabled": true
+    },
+    {
+      "key": "authorization-token",
+      "value": "cbedfb94-8afa-4812-8b97-4cad57888677",
+      "enabled": true
+    },
+    {
+      "key": "rest-house-auth-server",
+      "value": "{{rest-house-auth-server-protocol}}://{{rest-house-auth-server-host}}:{{rest-house-auth-server-port}}/auth",
       "enabled": true
     },
     {
@@ -37,23 +35,25 @@
     {
       "key": "rest-house-product-api-host",
       "value": "localhost",
-      "description": "",
       "enabled": true
     },
     {
       "key": "rest-house-product-api-port",
       "value": "8082",
-      "description": "",
       "enabled": true
     },
     {
       "key": "rest-house-product-api-protocol",
       "value": "http",
-      "description": "",
+      "enabled": true
+    },
+    {
+      "key": "rest-house-product-api",
+      "value": "{{rest-house-product-api-protocol}}://{{rest-house-product-api-host}}:{{rest-house-product-api-port}}/api",
       "enabled": true
     }
   ],
   "_postman_variable_scope": "environment",
-  "_postman_exported_at": "2019-03-12T16:34:06.857Z",
-  "_postman_exported_using": "Postman/6.7.3"
+  "_postman_exported_at": "2019-07-09T18:35:05.154Z",
+  "_postman_exported_using": "Postman/7.0.9"
 }
