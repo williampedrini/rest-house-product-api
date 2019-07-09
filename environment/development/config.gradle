@@ -1,0 +1,28 @@
+import java.nio.file.Files
+import java.nio.file.Path
+apply plugin: 'docker-compose'
+
+Files.createDirectories(Path.of(project.property('environment.development.messageBrokerConfigVolumeFolder')))
+Files.createDirectories(Path.of(project.property('environment.development.messageBrokerDataVolumeFolder')))
+Files.createDirectories(Path.of(project.property('environment.development.mongodbDatabaseVolume')))
+
+dockerCompose {
+    useComposeFiles = ['environment/development/docker-compose.yml']
+    removeVolumes = false
+    isRequiredBy(project.tasks.bootRun)
+}
+
+bootRun {
+    environment 'PRODUCT_MESSAGE_BROKER_URL', project.property('environment.development.messageBrokerPassword')
+    environment 'PRODUCT_MESSAGE_BROKER_USER', project.property('environment.development.messageBrokerUrl')
+    environment 'PRODUCT_MESSAGE_BROKER_PASSWORD', project.property('environment.development.messageBrokerUsername')
+    environment 'PRODUCT_MESSAGE_BROKER_OUTCOME_QUEUE', project.property('environment.development.messageBrokerOutcomeQueue')
+
+    environment 'PRODUCT_MONGODB_DATABASE', project.property('environment.development.mongodbAuthenticationDatabase')
+    environment 'PRODUCT_MONGODB_AUTHENTICATION_DATABASE', project.property('environment.development.mongodbDatabase')
+    environment 'PRODUCT_MONGODB_DATABASE_URI', project.property('environment.development.mongodbDatabaseUri')
+
+    environment 'PRODUCT_AUTH_CHECK_TOKEN_URL', project.property('environment.development.oauthCheckTokenUrl')
+    environment 'PRODUCT_AUTH_CLIENT_ID', project.property('environment.development.oauthClientId')
+    environment 'PRODUCT_AUTH_CLIENT_SECRET', project.property('environment.development.oauthClientSecret')
+}

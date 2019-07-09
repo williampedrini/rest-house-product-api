@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  product-database:
+    image: mongo:latest
+    container_name: product-database
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: rest-house
+      MONGO_INITDB_ROOT_PASSWORD: rest-house
+    ports:
+      - "27017:27017"
+    volumes:
+      - "/tmp/productDatabase:/data/db"

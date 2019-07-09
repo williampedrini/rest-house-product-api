@@ -1,0 +1,36 @@
+#####################################
+###  TOMCAT SERVER CONFIGURATION ####
+#####################################
+server:
+  port: 8082
+  servlet:
+    context-path: /api
+#####################################
+##  Resource Server Configuration ###
+#####################################
+spring:
+  security:
+    oauth2:
+      resource-server:
+        id: RestHouseProductApi
+        check-token-url: ${PRODUCT_AUTH_CHECK_TOKEN_URL}
+      client:
+        id: ${PRODUCT_AUTH_CLIENT_ID}
+        secret: ${PRODUCT_AUTH_CLIENT_SECRET}
+  #####################################
+  ####  Data Source Configuration #####
+  #####################################
+  data:
+    mongodb:
+      database: ${PRODUCT_MONGODB_DATABASE}
+      authentication-database: ${PRODUCT_MONGODB_AUTHENTICATION_DATABASE}
+      uri: ${PRODUCT_MONGODB_DATABASE_URI}
+  #####################################
+  ##  Message Broker Configuration ####
+  #####################################
+  activemq:
+    broker-url: ${PRODUCT_MESSAGE_BROKER_URL}
+    user: ${PRODUCT_MESSAGE_BROKER_USER}
+    password: ${PRODUCT_MESSAGE_BROKER_PASSWORD}
+    queue:
+      outcome: ${PRODUCT_MESSAGE_BROKER_OUTCOME_QUEUE}
