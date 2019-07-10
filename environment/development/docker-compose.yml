@@ -1,6 +1,31 @@
 version: '3'
 
 services:
+  rest-house-authorization-server:
+    image: rest-house-authorization-server_rest-house-authorization-server
+    environment:
+      - AUTH_DATASOURCE_URL=jdbc:postgresql://authorization-database:5432/rest-house-authorization
+      - AUTH_DATASOURCE_USERNAME=rest-house
+      - AUTH_DATASOURCE_PASSWORD=rest-house
+      - AUTH_FLYWAY_SCRIPT_LOCATION=classpath:database
+    ports:
+      - "8080:8080"
+    networks:
+      - rest-house-network
+    depends_on:
+      - authorization-database
+  authorization-database:
+    image: postgres:latest
+    container_name: authorization-database
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: rest-house
+      POSTGRES_USER: rest-house
+      POSTGRES_DB: rest-house-authorization
+    ports:
+      - "5432:5432"
+    networks:
+      - rest-house-network
   product-database:
     image: mongo:latest
     container_name: product-database
@@ -12,3 +37,6 @@ services:
       - "27017:27017"
     volumes:
       - "/tmp/productDatabase:/data/db"
+networks:
+  rest-house-network:
+    driver: bridge
