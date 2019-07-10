@@ -49,13 +49,27 @@ Please follow the steps defined on the following links, depending on your IDEA.
 * [Lombok Eclipse](https://projectlombok.org/setup/eclipse) - Installing lombok on Eclipse.
 * [Lombok Intellij](https://projectlombok.org/setup/intellij) - Installing lombok on Intellij.
 
-### Running in Development Mode
+## Running in Development Mode
 
 To run the API execute the following command:
 
 ```
  gradle -Penvironment=development bootRun
 ```
+
+## Publishing Images to Docker Hub
+
+1. Log in into docker using the following command:
+
+    ```
+    docker login
+    ```
+
+2. Publish the new Image using the following command:
+
+    ```
+    gradle dockerPush
+    ```
 
 ## Running Tests
 
