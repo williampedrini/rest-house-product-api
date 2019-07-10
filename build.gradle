@@ -35,7 +35,7 @@ springBoot {
         properties {
             artifact = 'rest-house-product-api'
             version = '1.0.0-SNAPSHOT'
-            group = 'com.custodio.resthouse.product.api'
+            group = 'com.custodio.resthouse'
             name = 'Rest House Product API'
         }
     }
