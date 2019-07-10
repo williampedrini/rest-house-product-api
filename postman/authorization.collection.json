@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "9594c078-6c2f-4f10-9f72-5414f9142dba",
+		"name": "Authorization",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Generate Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "243f1b51-2655-49b8-8bc8-6823fb214652",
+						"exec": [
+							"let response = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"authorization-token\", response.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "RestHouseClientSecret",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "RestHouseClientId",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json;charset=UTF-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{rest-house-auth-server}}/oauth/token?grant_type=password&password=admin&username=admin&client_id=RestHouseClientId&resource_id=RestHouseResourceApiId",
+					"host": [
+						"{{rest-house-auth-server}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "password"
+						},
+						{
+							"key": "password",
+							"value": "admin"
+						},
+						{
+							"key": "username",
+							"value": "admin"
+						},
+						{
+							"key": "client_id",
+							"value": "RestHouseClientId"
+						},
+						{
+							"key": "resource_id",
+							"value": "RestHouseResourceApiId"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "RestHouseClientSecret",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "RestHouseClientId",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{rest-house-auth-server}}/oauth/check_token?token={{authorization-token}}",
+					"host": [
+						"{{rest-house-auth-server}}"
+					],
+					"path": [
+						"oauth",
+						"check_token"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{authorization-token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
