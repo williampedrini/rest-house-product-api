@@ -2,7 +2,7 @@ version: '3'
 
 services:
   rest-house-authorization-server:
-    image: rest-house-authorization-server_rest-house-authorization-server
+    image: williamcustodio/rest-house-authorization-server:latest
     environment:
       - AUTH_DATASOURCE_URL=jdbc:postgresql://authorization-database:5432/rest-house-authorization
       - AUTH_DATASOURCE_USERNAME=rest-house
