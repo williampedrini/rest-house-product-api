@@ -17,6 +17,7 @@ buildscript {
 
 plugins {
     id "com.avast.gradle.docker-compose" version "0.9.4"
+    id 'com.palantir.docker' version '0.22.1'
 }
 
 apply plugin: 'java'
@@ -24,6 +25,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply from  : 'dependency.gradle'
 apply from  : 'config.gradle'
+apply from  : 'docker.gradle'
 
 compileJava {
     sourceCompatibility = JavaVersion.VERSION_12

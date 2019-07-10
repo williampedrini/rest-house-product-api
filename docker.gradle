@@ -1,0 +1,8 @@
+docker {
+    name project.property('environment.docker.name') + ':latest'
+    files jar.archiveFile
+    buildArgs([JAR_FILE: 'rest-house-product-api.jar'])
+    pull true
+    noCache true
+}
+docker.dependsOn(build)
