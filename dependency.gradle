@@ -21,6 +21,7 @@ dependencies {
         mockitoJupiterVersion="2.23.0"
         mockitoVersion="2.21.0"
         springfoxVersion="2.9.2"
+        springGcpPubSubVersion="1.0.0.RELEASE"
     }
 
     compile("org.glassfish.jaxb:jaxb-runtime")
@@ -33,6 +34,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-activemq")
     compile("org.springframework.security.oauth:spring-security-oauth2")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+    compile("org.springframework.cloud:spring-cloud-gcp-starter-pubsub:${springGcpPubSubVersion}")
+    compile("org.springframework.integration:spring-integration-core")
 
     compile("org.projectlombok:lombok")
     compile("org.projectlombok:lombok:${lombokVersion}")

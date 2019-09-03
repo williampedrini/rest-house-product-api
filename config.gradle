@@ -7,7 +7,6 @@ if (isDevelopment()) {
  * @return True if equals.
  */
 def isDevelopment() {
-
     isEnvironment(project.property('environment.development.name'))
 }
 
@@ -17,7 +16,6 @@ def isDevelopment() {
  * @return True if matches.
  */
 def isEnvironment(name) {
-
     project.hasProperty('environment') && project.property('environment') == name
 }
 
@@ -31,10 +29,6 @@ def getEnvironmentFile(environment) {
     logger.quiet('Datasource Username: {}', getEnvironmentProperty('environment.%s.mongodbAuthenticationDatabase', environment))
     logger.quiet('Datasource Password: {}', getEnvironmentProperty('environment.%s.mongodbDatabase', environment))
     logger.quiet('Datasource Url: {}', getEnvironmentProperty('environment.%s.mongodbDatabaseUri', environment))
-
-    logger.quiet('Message Broker Password: {}', getEnvironmentProperty('environment.%s.messageBrokerPassword', environment))
-    logger.quiet('Message Broker Url: {}', getEnvironmentProperty('environment.%s.messageBrokerUrl', environment))
-    logger.quiet('Message Broker Username: {}', getEnvironmentProperty('environment.%s.messageBrokerUsername', environment))
 
     logger.quiet('OAuth Check Token Url: {}', getEnvironmentProperty('environment.%s.oauthCheckTokenUrl', environment))
     logger.quiet('OAuth Client Id: {}', getEnvironmentProperty('environment.%s.oauthClientId', environment))

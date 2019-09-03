@@ -2,8 +2,6 @@ import java.nio.file.Files
 import java.nio.file.Path
 apply plugin: 'docker-compose'
 
-Files.createDirectories(Path.of(project.property('environment.development.messageBrokerConfigVolumeFolder')))
-Files.createDirectories(Path.of(project.property('environment.development.messageBrokerDataVolumeFolder')))
 Files.createDirectories(Path.of(project.property('environment.development.mongodbDatabaseVolume')))
 
 dockerCompose {
@@ -13,10 +11,9 @@ dockerCompose {
 }
 
 bootRun {
-    environment 'PRODUCT_MESSAGE_BROKER_URL', project.property('environment.development.messageBrokerPassword')
-    environment 'PRODUCT_MESSAGE_BROKER_USER', project.property('environment.development.messageBrokerUrl')
-    environment 'PRODUCT_MESSAGE_BROKER_PASSWORD', project.property('environment.development.messageBrokerUsername')
-    environment 'PRODUCT_MESSAGE_BROKER_OUTCOME_QUEUE', project.property('environment.development.messageBrokerOutcomeQueue')
+    environment 'GOOGLE_CLOUD_PROJECT', project.property('environment.development.gcp.project-id')
+    environment 'GOOGLE_CLOUD_PROJECT_TOPIC', project.property('environment.development.gcp.topic-id')
+    environment 'GOOGLE_APPLICATION_CREDENTIALS', project.property('environment.development.gcp.credentials.location')
 
     environment 'PRODUCT_MONGODB_DATABASE', project.property('environment.development.mongodbAuthenticationDatabase')
     environment 'PRODUCT_MONGODB_AUTHENTICATION_DATABASE', project.property('environment.development.mongodbDatabase')
