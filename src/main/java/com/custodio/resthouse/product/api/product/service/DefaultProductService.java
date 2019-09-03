@@ -2,27 +2,28 @@ package com.custodio.resthouse.product.api.product.service;
 
 import com.custodio.resthouse.product.api.common.exception.BusinessException;
 import com.custodio.resthouse.product.api.outcome.dto.OutcomeDTO;
-import com.custodio.resthouse.product.api.outcome.producer.OutcomeProducerImpl;
+import com.custodio.resthouse.product.api.outcome.publisher.OutcomePublisher;
 import com.custodio.resthouse.product.api.product.catalog.ProductValidationError;
 import com.custodio.resthouse.product.api.product.dto.ProductDTO;
 import com.custodio.resthouse.product.api.product.mapper.ProductMapper;
 import com.custodio.resthouse.product.api.product.repository.ProductRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 
 @Service
-public class ProductServiceImpl implements ProductService {
+public class DefaultProductService implements ProductService {
 
     private final ProductRepository repository;
 
-    private final OutcomeProducerImpl outcomeProducer;
+    private final OutcomePublisher outcomeProducer;
 
     @Autowired
-    public ProductServiceImpl(final ProductRepository repository, final OutcomeProducerImpl outcomeProducer) {
+    public DefaultProductService(final ProductRepository repository, @Qualifier("defaultOutcomePublisher") final OutcomePublisher outcomeProducer) {
         this.repository = repository;
         this.outcomeProducer = outcomeProducer;
     }

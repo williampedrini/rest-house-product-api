@@ -4,13 +4,13 @@ import com.custodio.resthouse.product.api.outcome.dto.OutcomeDTO;
 import com.custodio.resthouse.product.api.product.dto.ErrorResponseDTO;
 import com.custodio.resthouse.product.api.product.dto.ProductDTO;
 import com.custodio.resthouse.product.api.product.service.ProductService;
-import com.custodio.resthouse.product.api.product.service.ProductServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +25,7 @@ public class ProductRestController {
     private final ProductService productService;
 
     @Autowired
-    public ProductRestController(final ProductServiceImpl productService) {
+    public ProductRestController(@Qualifier("defaultProductService") final ProductService productService) {
         this.productService = productService;
     }
 
@@ -98,8 +98,8 @@ public class ProductRestController {
             @ApiResponse(code = 404, message = "The product does not exist.")
     })
     @PostMapping("/{id}/add")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void add(@PathVariable("id") final ObjectId id, final OutcomeDTO outcome) {
+    @ResponseStatus(HttpStatus.OK)
+    public void add(@PathVariable("id") final ObjectId id, @RequestBody final OutcomeDTO outcome) {
         this.productService.addToStock(id, outcome);
     }
 }

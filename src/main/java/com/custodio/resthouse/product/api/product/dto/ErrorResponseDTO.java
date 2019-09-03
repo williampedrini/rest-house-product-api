@@ -32,7 +32,7 @@ public class ErrorResponseDTO
      */
     private final List<MessageDTO> messages = new ArrayList<>();
 
-    public ErrorResponseDTO(final HttpStatus httpStatus, final MessageDTO... keys)
+    private ErrorResponseDTO(final HttpStatus httpStatus, final MessageDTO... keys)
     {
         this.httpStatus = httpStatus;
         this.timestamp = LocalDateTime.now();

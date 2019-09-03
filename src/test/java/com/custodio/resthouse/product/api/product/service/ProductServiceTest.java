@@ -3,7 +3,7 @@ package com.custodio.resthouse.product.api.product.service;
 import com.custodio.resthouse.product.api.common.exception.BusinessException;
 import com.custodio.resthouse.product.api.common.util.JSONUtil;
 import com.custodio.resthouse.product.api.outcome.dto.OutcomeDTO;
-import com.custodio.resthouse.product.api.outcome.producer.OutcomeProducerImpl;
+import com.custodio.resthouse.product.api.outcome.publisher.OutcomePublisher;
 import com.custodio.resthouse.product.api.product.catalog.ProductValidationError;
 import com.custodio.resthouse.product.api.product.dto.ProductDTO;
 import com.custodio.resthouse.product.api.product.model.Product;
@@ -35,13 +35,13 @@ class ProductServiceTest {
             .withModule(new JavaTimeModule())
             .build();
     @Mock
-    private OutcomeProducerImpl outcomeProducer;
+    private OutcomePublisher outcomeProducer;
 
     @Mock
     private ProductRepository productRepository;
 
     @InjectMocks
-    private ProductServiceImpl underTest;
+    private DefaultProductService underTest;
 
     @Test
     @DisplayName("Search for a non-existing product by its identifier.")
