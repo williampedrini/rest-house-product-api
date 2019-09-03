@@ -1,5 +1,6 @@
 package com.custodio.resthouse.product.api.outcome.model;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -22,4 +23,9 @@ public class Outcome implements Serializable {
     private Long value;
 
     private LocalDateTime creationTime;
+
+    @JsonGetter
+    public String getCreationTime() {
+        return this.creationTime.toString();
+    }
 }

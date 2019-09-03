@@ -4,7 +4,7 @@ import com.custodio.resthouse.product.api.common.exception.BusinessException;
 import com.custodio.resthouse.product.api.common.util.JSONUtil;
 import com.custodio.resthouse.product.api.outcome.catalog.OutcomeValidationError;
 import com.custodio.resthouse.product.api.outcome.dto.OutcomeDTO;
-import com.custodio.resthouse.product.api.outcome.model.Outcome;
+import com.custodio.resthouse.product.api.outcome.publisher.DefaultOutcomePublisher;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Assertions;
@@ -14,11 +14,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jms.core.JmsMessagingTemplate;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageHandler;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.jms.Queue;
 import java.io.IOException;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -35,13 +35,10 @@ class OutcomeProducerTest {
             .build();
 
     @Mock
-    private Queue queue;
-
-    @Mock
-    private JmsMessagingTemplate messagingTemplate;
+    private MessageHandler messagingTemplate;
 
     @InjectMocks
-    private OutcomeProducerImpl underTest;
+    private DefaultOutcomePublisher underTest;
 
     @Test
     @DisplayName("Try to persist an outcome without quantity.")
@@ -76,6 +73,6 @@ class OutcomeProducerTest {
     void createValidOutcome(@Value("${test-cases.create-valid-outcome.input}") final String inputPath) throws IOException {
         final var input = MAPPER.fileToBean(inputPath, OutcomeDTO.class);
         this.underTest.create(ObjectId.get().toString(), input);
-        verify(this.messagingTemplate, times(1)).convertAndSend(any(Queue.class), any(Outcome.class));
+        verify(this.messagingTemplate, times(1)).handleMessage(any(Message.class));
     }
 }

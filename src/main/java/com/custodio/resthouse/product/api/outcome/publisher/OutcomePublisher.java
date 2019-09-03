@@ -1,4 +1,4 @@
-package com.custodio.resthouse.product.api.outcome.producer;
+package com.custodio.resthouse.product.api.outcome.publisher;
 
 import com.custodio.resthouse.product.api.outcome.dto.OutcomeDTO;
 import com.custodio.resthouse.product.api.outcome.model.Outcome;
@@ -8,7 +8,7 @@ import com.custodio.resthouse.product.api.outcome.model.Outcome;
  *
  * @author williamcustodio
  */
-public interface OutcomeProducer {
+public interface OutcomePublisher {
 
     /**
      * Create a certain message containing a {@link Outcome} associated to the addition of a product to the stock.

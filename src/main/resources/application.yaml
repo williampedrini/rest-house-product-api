@@ -26,11 +26,7 @@ spring:
       authentication-database: ${PRODUCT_MONGODB_AUTHENTICATION_DATABASE}
       uri: ${PRODUCT_MONGODB_DATABASE_URI}
   #####################################
-  ##  Message Broker Configuration ####
+  #####  Publisher Configuration ######
   #####################################
-  activemq:
-    broker-url: ${PRODUCT_MESSAGE_BROKER_URL}
-    user: ${PRODUCT_MESSAGE_BROKER_USER}
-    password: ${PRODUCT_MESSAGE_BROKER_PASSWORD}
-    queue:
-      outcome: ${PRODUCT_MESSAGE_BROKER_OUTCOME_QUEUE}
+  gcp:
+    topic-id: ${GOOGLE_CLOUD_PROJECT_TOPIC}

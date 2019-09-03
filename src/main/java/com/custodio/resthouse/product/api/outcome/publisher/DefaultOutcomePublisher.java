@@ -1,31 +1,28 @@
-package com.custodio.resthouse.product.api.outcome.producer;
+package com.custodio.resthouse.product.api.outcome.publisher;
 
 import com.custodio.resthouse.product.api.common.exception.BusinessException;
 import com.custodio.resthouse.product.api.outcome.catalog.OutcomeValidationError;
 import com.custodio.resthouse.product.api.outcome.dto.OutcomeDTO;
 import com.custodio.resthouse.product.api.outcome.mapper.OutcomeMapper;
 import com.custodio.resthouse.product.api.outcome.model.Outcome;
+import com.custodio.resthouse.product.api.outcome.model.OutcomeMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.core.JmsMessagingTemplate;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.messaging.MessageHandler;
 import org.springframework.stereotype.Component;
 
-import javax.jms.Queue;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Slf4j
-@Component
-public class OutcomeProducerImpl implements OutcomeProducer {
+@Component("defaultOutcomePublisher")
+public class DefaultOutcomePublisher implements OutcomePublisher {
 
-    private final Queue queue;
+    private final MessageHandler messageHandler;
 
-    private final JmsMessagingTemplate messagingTemplate;
-
-    @Autowired
-    public OutcomeProducerImpl(final Queue queue, final JmsMessagingTemplate messagingTemplate) {
-        this.queue = queue;
-        this.messagingTemplate = messagingTemplate;
+    public DefaultOutcomePublisher(@Qualifier("outcomeTopicMessageHandler") final MessageHandler messageHandler) {
+        this.messageHandler = messageHandler;
     }
 
     @Override
@@ -33,12 +30,13 @@ public class OutcomeProducerImpl implements OutcomeProducer {
 
         this.validateMandatoryFields(outcome);
 
-        final Outcome outcomeMessage = OutcomeMapper.INSTANCE.dtoToModel(outcome);
-        outcomeMessage.setId(ObjectId.get().toString());
-        outcomeMessage.setProductId(id);
+        final Outcome payload = OutcomeMapper.INSTANCE.dtoToModel(outcome);
+        payload.setId(ObjectId.get().toString());
+        payload.setProductId(id);
+        payload.setCreationTime(LocalDateTime.now());
 
-        log.info("Creating outcome. [OUTCOME={}]", outcomeMessage);
-        this.messagingTemplate.convertAndSend(this.queue, outcomeMessage);
+        log.info("Creating outcome. [OUTCOME={}]", payload);
+        this.messageHandler.handleMessage(new OutcomeMessage(payload));
     }
 
     /**
