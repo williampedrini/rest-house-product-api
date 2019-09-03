@@ -30,12 +30,11 @@ dependencies {
     compile("io.springfox:springfox-swagger2:${springfoxVersion}")
     compile("io.springfox:springfox-swagger-ui:${springfoxVersion}")
 
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-activemq")
-    compile("org.springframework.security.oauth:spring-security-oauth2")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+    compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.cloud:spring-cloud-gcp-starter-pubsub:${springGcpPubSubVersion}")
     compile("org.springframework.integration:spring-integration-core")
+    compile("org.springframework.security.oauth:spring-security-oauth2")
 
     compile("org.projectlombok:lombok")
     compile("org.projectlombok:lombok:${lombokVersion}")
