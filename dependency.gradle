@@ -13,7 +13,6 @@ dependencies {
 
     ext {
         apacheCommonsCollectionsVersion="4.0"
-        flywayVersion="5.2.4"
         jacksonVersion="2.9.8"
         junitVersion="5.3.1"
         lombokVersion="1.18.6"
