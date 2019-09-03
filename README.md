@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them:
 
 ```
-Java 12
+Java 11
 Gradle 5.5
 Lombok Plugin 1.18.6 
 ```
@@ -25,7 +25,7 @@ Install the tool for managing parallel versions of multiple Software Development
 Execute the following command:
 
 ```
-sdk install java 12.0.1-sapmchn
+sdk install java 11.0.4-sapmchn
 ```
 
 ##### GRADLE
