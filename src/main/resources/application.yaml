@@ -26,7 +26,7 @@ spring:
       authentication-database: ${PRODUCT_MONGODB_AUTHENTICATION_DATABASE}
       uri: ${PRODUCT_MONGODB_DATABASE_URI}
   #####################################
-  #####  Publisher Configuration ######
+  ###  Google Pub/Sub Configuration ###
   #####################################
   gcp:
     topic-id: ${GOOGLE_CLOUD_PROJECT_TOPIC}
